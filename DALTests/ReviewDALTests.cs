@@ -28,7 +28,7 @@ namespace DALTests
         {
             var result = _dal.CreateReview(new ReviewDTO
             {
-                UserID = 2,
+                UserID = 11,
                 ProductID = 1,
                 Rating = 10,
                 Text = "testCreateReview"
@@ -68,7 +68,7 @@ namespace DALTests
         {
             var created = _dal.CreateReview(new ReviewDTO
             {
-                UserID = 2,
+                UserID = 11,
                 ProductID = 1,
                 Rating = 10,
                 Text = "testDeleteReviewText"

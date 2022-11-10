@@ -28,7 +28,7 @@ namespace DALTests
         {
             var result = _dal.CreateOrder(new OrderDTO
             {
-                UserID = 2,
+                UserID = 11,
                 ProductID = 1,
                 Quantity = 10
             });
@@ -49,12 +49,12 @@ namespace DALTests
         {
             var random = new Random();
 
-            var found = _dal.GetAllOrders().Find(x => x.OrderID == 5);
+            var found = _dal.GetAllOrders().Find(x => x.OrderID == 1);
             int oldQuantity = found.Quantity;
             found.Quantity = random.Next(0, 100);
 
             _dal.UpdateOrder(found);
-            found = _dal.GetAllOrders().Find(x => x.OrderID == 5);
+            found = _dal.GetAllOrders().Find(x => x.OrderID == 1);
             Assert.IsTrue(oldQuantity != found.Quantity);
         }
 
@@ -63,7 +63,7 @@ namespace DALTests
         {
             var result = _dal.CreateOrder(new OrderDTO
             {
-                UserID = 2,
+                UserID = 11,
                 ProductID = 1,
                 Quantity = 10
             });

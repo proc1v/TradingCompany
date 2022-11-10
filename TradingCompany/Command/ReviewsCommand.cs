@@ -40,17 +40,9 @@ namespace TradingCompany.Command
 
             var created = new ReviewDTO
             {
-                /*User = new UserDAL(
-                    new MapperConfiguration(
-                        cfg => cfg.AddMaps(typeof(ReviewDAL).Assembly))
-                    .CreateMapper()).GetUser(1),
-                Product = new ProductDAL(
-                    new MapperConfiguration(
-                        cfg => cfg.AddMaps(typeof(ReviewDAL).Assembly))
-                    .CreateMapper()).GetProduct(productID),*/
                 Rating = rating,
                 Text = reviewText,
-                UserID = 1,
+                UserID = 11,
                 ProductID = productID
             };
 

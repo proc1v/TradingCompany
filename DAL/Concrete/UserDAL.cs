@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using TradingCompany.DAL.Interfaces;
 using TradingCompany.DTO;
 
@@ -64,6 +66,21 @@ namespace DAL.Concrete
                 var found = entities.Users.SingleOrDefault(d => d.UserID == id);
                 return _mapper.Map<UserDTO>(found);
             }
+        }
+
+        public bool Login(string username, string password)
+        {
+            using (var ent = new CourseProject2022Entities())
+            {
+                UserDTO user = _mapper.Map<UserDTO>(ent.Users.FirstOrDefault(u => u.Login == username));
+                return user != null && user.Password.SequenceEqual(hash(password, user.Salt.ToString()));
+            }
+        }
+
+        private byte[] hash(string password, string salt)
+        {
+            var alg = SHA512.Create();
+            return alg.ComputeHash(Encoding.UTF8.GetBytes(password + salt));
         }
 
         public void UpdateUser(UserDTO user)

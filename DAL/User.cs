@@ -24,7 +24,8 @@ namespace DAL
         public int UserID { get; set; }
         public string Login { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        public byte[] Password { get; set; }
+        public System.Guid Salt { get; set; }
         public System.DateTime RowInsertTime { get; set; }
         public System.DateTime RowUpdateTime { get; set; }
     

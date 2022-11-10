@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DAL.Concrete;
 using System;
+using System.Security.Cryptography;
 using System.Text;
 using TradingCompany.DTO;
 
@@ -20,8 +21,9 @@ namespace TradingCompany
 
         static void Main(string[] args)
         {
-            Menu menu = new Menu();
-            menu.showMenu();
+            //Menu menu = new Menu();
+            //menu.showMenu();
+            AddNewUser();
         }
 
         private static void DeleteUser()
@@ -50,27 +52,20 @@ namespace TradingCompany
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
 
+            var alg = SHA512.Create();
+            var salt = Guid.NewGuid();
+
             var dal = new UserDAL(Mapper);
             var user = new UserDTO
             {
                 Login = login,
                 Email = email,
-                Password = password
+                Password = alg.ComputeHash(Encoding.UTF8.GetBytes(password + salt)),
+                Salt = salt
             };
 
             user = dal.CreateUser(user);
             Console.WriteLine($"New user ID: {user.UserID}");
-        }
-
-        private static void ListAllUsers()
-        {
-            var dal = new UserDAL(Mapper);
-            var users = dal.GetAllUsers();
-
-            foreach (var user in users)
-            {
-                Console.WriteLine($"{user.Login.Trim()} {user.Password.Trim()}");
-            }
         }
     }
 }

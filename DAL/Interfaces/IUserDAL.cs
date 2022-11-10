@@ -11,5 +11,6 @@ namespace TradingCompany.DAL.Interfaces
         UserDTO GetUser(int id);
         void UpdateUser(UserDTO user);
         void DeleteUser(UserDTO user);
+        bool Login(string username, string password);
     }
 }

@@ -19,6 +19,9 @@ namespace TradingCompany.DAL.Concrete
 
         public OrderDTO CreateOrder(OrderDTO order)
         {
+            order.OrderID = 0;
+            order.Product = null;
+            order.User = null;
             using (var entities = new CourseProject2022Entities())
             {
                 var orderInDB = _mapper.Map<Order>(order);
@@ -45,6 +48,15 @@ namespace TradingCompany.DAL.Concrete
             using (var entities = new CourseProject2022Entities())
             {
                 var orders = entities.Orders.ToList();
+                return _mapper.Map<List<OrderDTO>>(orders);
+            }
+        }
+
+        public List<OrderDTO> GetUserOrders(int userID)
+        {
+            using (var entities = new CourseProject2022Entities())
+            {
+                var orders = entities.Orders.Where(u => u.UserID == userID).ToList();
                 return _mapper.Map<List<OrderDTO>>(orders);
             }
         }
